@@ -3,9 +3,12 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:mini_task_manager/providers/task_repository_impl_provider.dart';
 import 'package:mini_task_manager/screens/home/providers/filtered_tasks_provider.dart';
 import 'package:mini_task_manager/screens/home/providers/selected_tasks_provider.dart';
+import 'package:mini_task_manager/screens/home/providers/task_due_date_provider.dart';
+import 'package:mini_task_manager/screens/home/providers/task_priority_provider.dart';
 import 'package:mini_task_manager/screens/home/widgets/task_bottom_sheet.dart';
 import 'package:mini_task_manager/screens/home/widgets/task_tile.dart';
 import 'package:mini_task_manager/widgets/basic_bottom_sheet.dart';
+import 'package:mini_task_manager/widgets/basic_button.dart';
 
 class HomeScreen extends ConsumerWidget {
   const HomeScreen({super.key});
@@ -14,6 +17,8 @@ class HomeScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final tasks = ref.watch(filteredTasksProvider);
     final selectedTasks = ref.watch(selectedTasksProvider);
+    final priority = ref.watch(taskPriorityProvider);
+    final dueDate = ref.watch(taskDueDateProvider);
     return Scaffold(
       appBar: AppBar(
         title: selectedTasks.isEmpty
@@ -43,7 +48,6 @@ class HomeScreen extends ConsumerWidget {
                   error: (error, stackTrace) => Container(),
                   loading: () => Container(),
                 ),
-
                 IconButton(
                   onPressed: () async {
                     List allTasks = (await ref.read(
@@ -65,23 +69,63 @@ class HomeScreen extends ConsumerWidget {
               ]
             : null,
       ),
-      body: tasks.when(
-        data: (tasks) {
-          return ListView.builder(
-            itemCount: tasks.length,
-            itemBuilder: (context, index) {
-              final task = tasks[index];
-              return TaskTile(
-                task: task,
-                onTap: selectedTasks.isEmpty
-                    ? () {
-                        BasicBottomSheet.openSheet(
-                          context,
-                          TaskBottomSheet(existingTask: task),
-                          isScrollControlled: true,
-                        );
-                      }
-                    : () {
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            spacing: 8,
+            children: [
+              SegmentedButton(
+                segments: [1, 2, 3].map((value) {
+                  return ButtonSegment(
+                    value: value,
+                    label: Text(priorityLabels[value]!),
+                    // icon: Icon(Icons.calendar_view_day),
+                  );
+                }).toList(),
+                selected: priority != null ? {priority} : {},
+                emptySelectionAllowed: true,
+                onSelectionChanged: (selected) {
+                  ref
+                      .read(taskPriorityProvider.notifier)
+                      .filterPriority(
+                        selected.isNotEmpty ? selected.first : null,
+                      );
+                },
+              ),
+            ],
+          ),
+          tasks.when(
+            data: (tasks) {
+              return Expanded(
+                child: ListView.builder(
+                  itemCount: tasks.length,
+                  itemBuilder: (context, index) {
+                    final task = tasks[index];
+                    return TaskTile(
+                      task: task,
+                      onTap: selectedTasks.isEmpty
+                          ? () {
+                              BasicBottomSheet.openSheet(
+                                context,
+                                TaskBottomSheet(existingTask: task),
+                                isScrollControlled: true,
+                              );
+                            }
+                          : () {
+                              if (selectedTasks.contains(task.id)) {
+                                ref
+                                    .read(selectedTasksProvider.notifier)
+                                    .remove(task.id!);
+                              } else {
+                                ref
+                                    .read(selectedTasksProvider.notifier)
+                                    .add(task.id!);
+                              }
+                            },
+                      onLongPress: () {
                         if (selectedTasks.contains(task.id)) {
                           ref
                               .read(selectedTasksProvider.notifier)
@@ -92,19 +136,15 @@ class HomeScreen extends ConsumerWidget {
                               .add(task.id!);
                         }
                       },
-                onLongPress: () {
-                  if (selectedTasks.contains(task.id)) {
-                    ref.read(selectedTasksProvider.notifier).remove(task.id!);
-                  } else {
-                    ref.read(selectedTasksProvider.notifier).add(task.id!);
-                  }
-                },
+                    );
+                  },
+                ),
               );
             },
-          );
-        },
-        error: (error, stackTrace) => Center(child: Text("Error: $error")),
-        loading: () => const Center(child: CircularProgressIndicator()),
+            error: (error, stackTrace) => Center(child: Text("Error: $error")),
+            loading: () => const Center(child: CircularProgressIndicator()),
+          ),
+        ],
       ),
       floatingActionButton: FloatingActionButton(
         tooltip: 'Add',
