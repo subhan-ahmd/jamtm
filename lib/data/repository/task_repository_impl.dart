@@ -77,4 +77,17 @@ class TaskRepositoryImpl
         ]))
         .get();
   }
+
+  @override
+  Future<List<TaskTableData>> filter({int? priority, DateTime? dueDate}) {
+    final query = db.select(db.taskTable);
+    if (priority != null) {
+      query.where((t) => t.priority.equals(priority));
+    }
+    if (dueDate != null) {
+      final dateStr = dueDate.toIso8601String().split('T').first;
+      query.where((t) => t.date.like('$dateStr%'));
+    }
+    return query.get();
+  }
 }

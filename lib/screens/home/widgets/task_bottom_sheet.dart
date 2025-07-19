@@ -5,7 +5,7 @@ import 'package:mini_task_manager/data/mappers/task_mappers.dart';
 import 'package:mini_task_manager/models/task.dart';
 import 'package:mini_task_manager/providers/task_repository_impl_provider.dart';
 import 'package:mini_task_manager/screens/home/providers/new_task_provider.dart';
-import 'package:mini_task_manager/screens/home/providers/ordered_tasks_provider.dart';
+import 'package:mini_task_manager/screens/home/providers/filtered_tasks_provider.dart';
 import 'package:mini_task_manager/screens/home/providers/read_only_provider.dart';
 import 'package:mini_task_manager/widgets/basic_bottom_sheet.dart';
 import 'package:mini_task_manager/widgets/basic_button.dart';
@@ -169,13 +169,13 @@ class _TaskBottomSheetState extends ConsumerState<TaskBottomSheet> {
                                   widget.existingTask!.id!,
                                   updatedTask.toCompanion(),
                                 );
-                            ref.invalidate(orderedTasksProvider);
+                            ref.invalidate(filteredTasksProvider);
                           }
                         } else {
                           await ref
                               .read(taskRepositoryProvider)
                               .insert(updatedTask.toCompanion());
-                          ref.invalidate(orderedTasksProvider);
+                          ref.invalidate(filteredTasksProvider);
                           Navigator.pop(context);
                         }
                       },

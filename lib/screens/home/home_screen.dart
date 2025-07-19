@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:mini_task_manager/providers/task_repository_impl_provider.dart';
-import 'package:mini_task_manager/screens/home/providers/ordered_tasks_provider.dart';
+import 'package:mini_task_manager/screens/home/providers/filtered_tasks_provider.dart';
 import 'package:mini_task_manager/screens/home/providers/selected_tasks_provider.dart';
 import 'package:mini_task_manager/screens/home/widgets/task_bottom_sheet.dart';
 import 'package:mini_task_manager/screens/home/widgets/task_tile.dart';
@@ -12,7 +12,7 @@ class HomeScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final tasks = ref.watch(orderedTasksProvider);
+    final tasks = ref.watch(filteredTasksProvider);
     final selectedTasks = ref.watch(selectedTasksProvider);
     return Scaffold(
       appBar: AppBar(
@@ -31,7 +31,7 @@ class HomeScreen extends ConsumerWidget {
                       ? IconButton(
                           onPressed: () async {
                             List<int> allTasks = (await ref.read(
-                              orderedTasksProvider.future,
+                              filteredTasksProvider.future,
                             )).map((task) => task.id!).toList();
                             ref
                                 .read(selectedTasksProvider.notifier)
@@ -47,7 +47,7 @@ class HomeScreen extends ConsumerWidget {
                 IconButton(
                   onPressed: () async {
                     List allTasks = (await ref.read(
-                      orderedTasksProvider.future,
+                      filteredTasksProvider.future,
                     ));
                     if (allTasks.length == selectedTasks.length) {
                       await ref.read(taskRepositoryProvider).deleteAll();
@@ -57,8 +57,8 @@ class HomeScreen extends ConsumerWidget {
                             await ref.read(taskRepositoryProvider).delete(task),
                       );
                     }
-                     ref.read(selectedTasksProvider.notifier).removeAll();
-                    ref.invalidate(orderedTasksProvider);
+                    ref.read(selectedTasksProvider.notifier).removeAll();
+                    ref.invalidate(filteredTasksProvider);
                   },
                   icon: Icon(Icons.delete_rounded),
                 ),

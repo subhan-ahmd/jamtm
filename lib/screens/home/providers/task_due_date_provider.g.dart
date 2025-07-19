@@ -1,27 +1,26 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'task_descending_provider.dart';
+part of 'task_due_date_provider.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$taskDescendingControllerHash() =>
-    r'd5d16cd4ed14e4b14fb1085fd9c31a56f3931eee';
+String _$taskDueDateHash() => r'e1eb0355cffd68123eeba59c40ba6f3772e78bd6';
 
-/// See also [TaskDescendingController].
-@ProviderFor(TaskDescendingController)
-final taskDescendingControllerProvider =
-    AutoDisposeNotifierProvider<TaskDescendingController, bool>.internal(
-      TaskDescendingController.new,
-      name: r'taskDescendingControllerProvider',
+/// See also [TaskDueDate].
+@ProviderFor(TaskDueDate)
+final taskDueDateProvider =
+    AutoDisposeNotifierProvider<TaskDueDate, DateTime?>.internal(
+      TaskDueDate.new,
+      name: r'taskDueDateProvider',
       debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
           ? null
-          : _$taskDescendingControllerHash,
+          : _$taskDueDateHash,
       dependencies: null,
       allTransitiveDependencies: null,
     );
 
-typedef _$TaskDescendingController = AutoDisposeNotifier<bool>;
+typedef _$TaskDueDate = AutoDisposeNotifier<DateTime?>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package
