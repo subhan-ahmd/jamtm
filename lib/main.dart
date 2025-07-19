@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:mini_task_manager/screens/home/home_screen.dart';
 import 'package:mini_task_manager/utils/theme_manager.dart';
 
 void main() {
-  runApp(const MiniTaskManager());
+  runApp(ProviderScope(child: const MiniTaskManager()));
 }
 
 class MiniTaskManager extends StatelessWidget {
