@@ -11,6 +11,8 @@ part 'database.g.dart';
 class AppDb extends _$AppDb {
   AppDb() : super(_openConnection());
 
+  AppDb.test() : super(NativeDatabase.memory());
+
   @override
   int get schemaVersion => 1;
 }
