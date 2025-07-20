@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:mini_task_manager/data/mappers/task_mappers.dart';
@@ -71,7 +70,7 @@ class _TaskBottomSheetState extends ConsumerState<TaskBottomSheet> {
               controller: descriptionController,
               label: "Description",
               readOnly: widget.existingTask != null && readOnly,
-              maxLines: 5,
+              maxLines: 10,
               onChanged: (value) {
                 ref
                     .read(
@@ -172,37 +171,41 @@ class _TaskBottomSheetState extends ConsumerState<TaskBottomSheet> {
                           ? (readOnly ? "Edit Task" : "Update Task")
                           : "Add Task",
                       maxButton: true,
-                      onPressed: () async {
-                        final updatedTask = ref.read(
-                          newTaskProvider(initial: widget.existingTask),
-                        );
+                      onPressed:
+                          titleController.text.isNotEmpty &&
+                              descriptionController.text.isNotEmpty
+                          ? () async {
+                              final updatedTask = ref.read(
+                                newTaskProvider(initial: widget.existingTask),
+                              );
 
-                        if (widget.existingTask != null) {
-                          if (readOnly) {
-                            ref
-                                .read(
-                                  readOnlyProvider(
-                                    widget.existingTask?.id,
-                                  ).notifier,
-                                )
-                                .toggle();
-                          } else {
-                            await ref
-                                .read(taskRepositoryProvider)
-                                .update(
-                                  widget.existingTask!.id!,
-                                  updatedTask.toCompanion(),
-                                );
-                            ref.invalidate(filteredTasksProvider);
-                          }
-                        } else {
-                          await ref
-                              .read(taskRepositoryProvider)
-                              .insert(updatedTask.toCompanion());
-                          ref.invalidate(filteredTasksProvider);
-                          Navigator.pop(context);
-                        }
-                      },
+                              if (widget.existingTask != null) {
+                                if (readOnly) {
+                                  ref
+                                      .read(
+                                        readOnlyProvider(
+                                          widget.existingTask?.id,
+                                        ).notifier,
+                                      )
+                                      .toggle();
+                                } else {
+                                  await ref
+                                      .read(taskRepositoryProvider)
+                                      .update(
+                                        widget.existingTask!.id!,
+                                        updatedTask.toCompanion(),
+                                      );
+                                  ref.invalidate(filteredTasksProvider);
+                                }
+                              } else {
+                                await ref
+                                    .read(taskRepositoryProvider)
+                                    .insert(updatedTask.toCompanion());
+                                ref.invalidate(filteredTasksProvider);
+                                Navigator.pop(context);
+                              }
+                            }
+                          : null,
                     ),
                   ),
                 ],

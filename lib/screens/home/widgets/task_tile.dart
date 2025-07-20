@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:mini_task_manager/models/task.dart';
-import 'package:mini_task_manager/screens/home/providers/selected_tasks_provider.dart';
 import 'package:mini_task_manager/screens/home/widgets/priority_bubble.dart';
-import 'package:mini_task_manager/screens/home/widgets/task_bottom_sheet.dart';
-import 'package:mini_task_manager/utils/color_manager.dart';
 import 'package:mini_task_manager/utils/theme_manager.dart';
 import 'package:mini_task_manager/widgets/basic_checkbox.dart';
 

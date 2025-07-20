@@ -1,7 +1,6 @@
 import 'package:mini_task_manager/models/task.dart';
 import 'package:mini_task_manager/utils/color_manager.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
-import 'package:flutter/material.dart';
 
 class TaskDataSource extends CalendarDataSource {
   TaskDataSource(List<Task> tasks) {

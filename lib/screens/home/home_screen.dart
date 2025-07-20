@@ -61,10 +61,9 @@ class HomeScreen extends ConsumerWidget {
                     if (allTasks.length == selectedTasks.length) {
                       await ref.read(taskRepositoryProvider).deleteAll();
                     } else {
-                      selectedTasks.forEach(
-                        (task) async =>
-                            await ref.read(taskRepositoryProvider).delete(task),
-                      );
+                      for(final task in selectedTasks) {
+                        await ref.read(taskRepositoryProvider).delete(task);
+                      }
                     }
                     ref.read(selectedTasksProvider.notifier).removeAll();
                     ref.invalidate(filteredTasksProvider);
