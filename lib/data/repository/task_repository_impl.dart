@@ -78,7 +78,6 @@ class TaskRepositoryImpl
         .get();
   }
 
-  @override
   Future<List<TaskTableData>> filter({
     int? priority,
     DateTime? dueDate,
@@ -96,6 +95,9 @@ class TaskRepositoryImpl
         query.where((t) => t.date.equals(dateStr));
       }
     }
+    query.orderBy([
+      (t) => OrderingTerm(expression: t.date, mode: OrderingMode.asc),
+    ]);
     return query.get();
   }
 }
