@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:mini_task_manager/screens/calendar_view/calendar_view_screen.dart';
+import 'package:mini_task_manager/screens/schedule_view/schedule_view_screen.dart';
 import 'package:mini_task_manager/widgets/basic_scaffold/providers/current_tab_provider.dart';
 import 'package:mini_task_manager/screens/home/home_screen.dart';
 
@@ -28,9 +29,18 @@ class BasicScaffold extends ConsumerWidget {
             icon: Icon(Icons.calendar_today_outlined),
             label: 'Calendar View',
           ),
+          NavigationDestination(
+            selectedIcon: Icon(Icons.calendar_view_day),
+            icon: Icon(Icons.calendar_view_day_outlined),
+            label: 'Schedule View',
+          ),
         ],
       ),
-      body: <Widget>[HomeScreen(), CalendarViewScreen()][currentTab],
+      body: <Widget>[
+        HomeScreen(),
+        CalendarViewScreen(),
+        ScheduleViewScreen(),
+      ][currentTab],
     );
   }
 }
