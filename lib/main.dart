@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:mini_task_manager/screens/home/home_screen.dart';
 import 'package:mini_task_manager/utils/theme_manager.dart';
+import 'package:mini_task_manager/widgets/basic_scaffold/basic_scaffold.dart';
 
 void main() {
   runApp(ProviderScope(child: const MiniTaskManager()));
@@ -16,7 +16,7 @@ class MiniTaskManager extends StatelessWidget {
       title: 'Mini Task Manager',
       themeMode: ThemeMode.light,
       theme: ThemeManager.appTheme,
-      home: HomeScreen(),
+      home: BasicScaffold(),
     );
   }
 }
