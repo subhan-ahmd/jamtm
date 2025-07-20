@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:mini_task_manager/screens/home/providers/filtered_tasks_provider.dart';
-import 'package:mini_task_manager/widgets/basic_scaffold/new_task_fab.dart';
+import 'package:mini_task_manager/widgets/new_task_fab.dart';
 import 'package:mini_task_manager/widgets/calendar_widget.dart';
 import 'package:mini_task_manager/widgets/loading_widget.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';

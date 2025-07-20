@@ -9,7 +9,7 @@ import 'package:mini_task_manager/screens/home/widgets/task_bottom_sheet.dart';
 import 'package:mini_task_manager/screens/home/widgets/task_tile.dart';
 import 'package:mini_task_manager/widgets/basic_bottom_sheet.dart';
 import 'package:mini_task_manager/widgets/basic_button.dart';
-import 'package:mini_task_manager/widgets/basic_scaffold/new_task_fab.dart';
+import 'package:mini_task_manager/widgets/new_task_fab.dart';
 import 'package:mini_task_manager/widgets/loading_widget.dart';
 
 class HomeScreen extends ConsumerWidget {

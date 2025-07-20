@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:mini_task_manager/utils/color_manager.dart';
 import 'package:mini_task_manager/widgets/basic_scaffold/providers/current_tab_provider.dart';
 
 class BasicScaffold extends ConsumerWidget {
@@ -16,6 +17,7 @@ class BasicScaffold extends ConsumerWidget {
     final currentTab = ref.watch(currentTabProvider);
     return Scaffold(
       bottomNavigationBar: NavigationBar(
+        backgroundColor: ColorManager.white,
         onDestinationSelected: (int index) {
           ref.read(currentTabProvider.notifier).toggle(index);
         },
