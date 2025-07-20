@@ -144,49 +144,43 @@ class HomeScreen extends ConsumerWidget {
           ),
           Expanded(
             child: tasks.when(
-              data: (tasks) {
-                return Expanded(
-                  child: ListView.builder(
-                    itemCount: tasks.length,
-                    itemBuilder: (context, index) {
-                      final task = tasks[index];
-                      return TaskTile(
-                        task: task,
-                        onTap: selectedTasks.isEmpty
-                            ? () {
-                                BasicBottomSheet.openSheet(
-                                  context,
-                                  TaskBottomSheet(existingTask: task),
-                                  isScrollControlled: true,
-                                );
-                              }
-                            : () {
-                                if (selectedTasks.contains(task.id)) {
-                                  ref
-                                      .read(selectedTasksProvider.notifier)
-                                      .remove(task.id!);
-                                } else {
-                                  ref
-                                      .read(selectedTasksProvider.notifier)
-                                      .add(task.id!);
-                                }
-                              },
-                        onLongPress: () {
-                          if (selectedTasks.contains(task.id)) {
-                            ref
-                                .read(selectedTasksProvider.notifier)
-                                .remove(task.id!);
-                          } else {
-                            ref
-                                .read(selectedTasksProvider.notifier)
-                                .add(task.id!);
+              data: (tasks) => ListView.builder(
+                itemCount: tasks.length,
+                itemBuilder: (context, index) {
+                  final task = tasks[index];
+                  return TaskTile(
+                    task: task,
+                    onTap: selectedTasks.isEmpty
+                        ? () {
+                            BasicBottomSheet.openSheet(
+                              context,
+                              TaskBottomSheet(existingTask: task),
+                              isScrollControlled: true,
+                            );
                           }
-                        },
-                      );
+                        : () {
+                            if (selectedTasks.contains(task.id)) {
+                              ref
+                                  .read(selectedTasksProvider.notifier)
+                                  .remove(task.id!);
+                            } else {
+                              ref
+                                  .read(selectedTasksProvider.notifier)
+                                  .add(task.id!);
+                            }
+                          },
+                    onLongPress: () {
+                      if (selectedTasks.contains(task.id)) {
+                        ref
+                            .read(selectedTasksProvider.notifier)
+                            .remove(task.id!);
+                      } else {
+                        ref.read(selectedTasksProvider.notifier).add(task.id!);
+                      }
                     },
-                  ),
-                );
-              },
+                  );
+                },
+              ),
               error: (error, stackTrace) =>
                   Center(child: Text("Error: $error")),
               loading: () => const Center(child: CircularProgressIndicator()),
