@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-    namespace = "com.subhan.mini_task_manager"
+    namespace = "com.subhan.jamtm"
     compileSdk = flutter.compileSdkVersion
     ndkVersion = "27.0.12077973"
 
@@ -19,7 +19,7 @@ android {
     }
 
     defaultConfig {
-        applicationId = "com.subhan.mini_task_manager"
+        applicationId = "com.subhan.jamtm"
         minSdk = flutter.minSdkVersion
         targetSdk = flutter.targetSdkVersion
         versionCode = flutter.versionCode

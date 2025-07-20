@@ -1,4 +1,4 @@
-package com.subhan.mini_task_manager
+package com.subhan.jamtm
 
 import io.flutter.embedding.android.FlutterActivity
 
