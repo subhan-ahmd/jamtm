@@ -8,6 +8,9 @@ class BasicButton extends StatelessWidget {
   final Color? backgroundColor;
   final Color? textColor;
   final bool maxButton;
+  final Size? buttonSize;
+  final bool noPadding;
+  final Widget? icon;
   const BasicButton({
     super.key,
     required this.data,
@@ -16,6 +19,9 @@ class BasicButton extends StatelessWidget {
     this.backgroundColor,
     this.textColor,
     this.maxButton = false,
+    this.noPadding = true,
+    this.buttonSize,
+    this.icon,
   });
 
   @override
@@ -24,13 +30,17 @@ class BasicButton extends StatelessWidget {
       onPressed: onPressed,
       style: ButtonStyle(
         padding: WidgetStateProperty.all(
-          EdgeInsets.symmetric(horizontal: 8, vertical: maxButton ? 12 : 0),
+          noPadding?EdgeInsets.zero:EdgeInsets.symmetric(horizontal: 8, vertical: maxButton ? 12 : 4),
         ),
         visualDensity: VisualDensity.compact,
         tapTargetSize: MaterialTapTargetSize.shrinkWrap,
         backgroundColor: WidgetStateProperty.all(backgroundColor),
         surfaceTintColor: WidgetStateProperty.all(Colors.transparent),
-        minimumSize: WidgetStateProperty.all(Size(double.maxFinite, 55)),
+        minimumSize: maxButton
+                ? WidgetStateProperty.all(Size(double.infinity, 55))
+                : (buttonSize != null
+                    ? WidgetStateProperty.all(buttonSize ?? const Size(146, 44))
+                    : WidgetStateProperty.all(Size(80, 45))),
         shadowColor: WidgetStateProperty.all(Colors.transparent),
         side: WidgetStateProperty.all(
           BorderSide(color: borderColor ?? ColorManager.accent, width: 1.0),
@@ -39,15 +49,34 @@ class BasicButton extends StatelessWidget {
           RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
         ),
       ),
-      child: Text(
-        data,
-        overflow: TextOverflow.ellipsis,
-        style: TextStyle(
-          color: textColor ?? ColorManager.primaryText,
-          fontWeight: FontWeight.w500,
-          fontSize: 14,
-        ),
-      ),
+      child: icon == null
+              ? Text(
+                data,
+                overflow: TextOverflow.ellipsis,
+                style: TextStyle(
+                  color: textColor ?? ColorManager.primaryText,
+                  fontWeight: FontWeight.w500,
+                  fontSize: 14,
+                ),
+              )
+              : Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                spacing: icon != null ? 8 : 0,
+                children: [
+                  icon ?? Container(),
+                  if(data.isNotEmpty)
+                  Text(
+                    data,
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(
+                      color: textColor ?? ColorManager.primaryText,
+                      fontWeight: FontWeight.w600,
+                      fontSize: 16,
+                    ),
+                  ),
+                ],
+              ),
     );
   }
 }

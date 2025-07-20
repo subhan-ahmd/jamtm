@@ -73,76 +73,133 @@ class HomeScreen extends ConsumerWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            spacing: 8,
-            children: [
-              SegmentedButton(
-                segments: [1, 2, 3].map((value) {
-                  return ButtonSegment(
-                    value: value,
-                    label: Text(priorityLabels[value]!),
-                    // icon: Icon(Icons.calendar_view_day),
-                  );
-                }).toList(),
-                selected: priority != null ? {priority} : {},
-                emptySelectionAllowed: true,
-                onSelectionChanged: (selected) {
-                  ref
-                      .read(taskPriorityProvider.notifier)
-                      .filterPriority(
-                        selected.isNotEmpty ? selected.first : null,
+          Container(
+            height: 50,
+            width: double.maxFinite,
+            child: SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.start,
+                spacing: 8,
+                children: [
+                  SegmentedButton(
+                    segments: [1, 2, 3].map((value) {
+                      return ButtonSegment(
+                        value: value,
+                        label: Text(priorityLabels[value]!),
                       );
-                },
-              ),
-            ],
-          ),
-          tasks.when(
-            data: (tasks) {
-              return Expanded(
-                child: ListView.builder(
-                  itemCount: tasks.length,
-                  itemBuilder: (context, index) {
-                    final task = tasks[index];
-                    return TaskTile(
-                      task: task,
-                      onTap: selectedTasks.isEmpty
-                          ? () {
-                              BasicBottomSheet.openSheet(
-                                context,
-                                TaskBottomSheet(existingTask: task),
-                                isScrollControlled: true,
-                              );
-                            }
-                          : () {
-                              if (selectedTasks.contains(task.id)) {
-                                ref
-                                    .read(selectedTasksProvider.notifier)
-                                    .remove(task.id!);
-                              } else {
-                                ref
-                                    .read(selectedTasksProvider.notifier)
-                                    .add(task.id!);
-                              }
-                            },
-                      onLongPress: () {
-                        if (selectedTasks.contains(task.id)) {
-                          ref
-                              .read(selectedTasksProvider.notifier)
-                              .remove(task.id!);
-                        } else {
-                          ref
-                              .read(selectedTasksProvider.notifier)
-                              .add(task.id!);
-                        }
+                    }).toList(),
+                    selected: priority != null ? {priority} : {},
+                    emptySelectionAllowed: true,
+                    showSelectedIcon: false,
+                    onSelectionChanged: (selected) {
+                      ref
+                          .read(taskPriorityProvider.notifier)
+                          .filterPriority(
+                            selected.isNotEmpty ? selected.first : null,
+                          );
+                    },
+                  ),
+                  BasicButton(
+                    data: dueDate != null
+                        ? "Due: ${dueDate.toLocal().toIso8601String().split('T').first}"
+                        : "Due Date",
+
+                    onPressed: () async {
+                      DateTime startDate = DateTime(
+                        DateTime.now().year,
+                        DateTime.now().month,
+                        DateTime.now().day,
+                      );
+                      ref
+                          .read(taskDueDateProvider.notifier)
+                          .filterDueDate(
+                            await showDatePicker(
+                              context: context,
+                              initialDate: startDate,
+                              firstDate: startDate,
+                              lastDate: DateTime(2050),
+                            ),
+                          );
+                    },
+                  ),
+                  if (priority != null || dueDate != null)
+                    BasicButton(
+                      data: "",
+                      icon: Icon(Icons.close),
+                      noPadding: true,
+                      onPressed: () async {
+                        DateTime startDate = DateTime(
+                          DateTime.now().year,
+                          DateTime.now().month,
+                          DateTime.now().day,
+                        );
+                        ref
+                            .read(taskDueDateProvider.notifier)
+                            .filterDueDate(
+                              null
+                            );
+                         ref
+                          .read(taskPriorityProvider.notifier)
+                          .filterPriority(
+                           null
+                          );
                       },
-                    );
-                  },
-                ),
-              );
-            },
-            error: (error, stackTrace) => Center(child: Text("Error: $error")),
-            loading: () => const Center(child: CircularProgressIndicator()),
+                    ),
+                ],
+              ),
+            ),
+          ),
+          Expanded(
+            child: tasks.when(
+              data: (tasks) {
+                return Expanded(
+                  child: ListView.builder(
+                    itemCount: tasks.length,
+                    itemBuilder: (context, index) {
+                      final task = tasks[index];
+                      return TaskTile(
+                        task: task,
+                        onTap: selectedTasks.isEmpty
+                            ? () {
+                                BasicBottomSheet.openSheet(
+                                  context,
+                                  TaskBottomSheet(existingTask: task),
+                                  isScrollControlled: true,
+                                );
+                              }
+                            : () {
+                                if (selectedTasks.contains(task.id)) {
+                                  ref
+                                      .read(selectedTasksProvider.notifier)
+                                      .remove(task.id!);
+                                } else {
+                                  ref
+                                      .read(selectedTasksProvider.notifier)
+                                      .add(task.id!);
+                                }
+                              },
+                        onLongPress: () {
+                          if (selectedTasks.contains(task.id)) {
+                            ref
+                                .read(selectedTasksProvider.notifier)
+                                .remove(task.id!);
+                          } else {
+                            ref
+                                .read(selectedTasksProvider.notifier)
+                                .add(task.id!);
+                          }
+                        },
+                      );
+                    },
+                  ),
+                );
+              },
+              error: (error, stackTrace) =>
+                  Center(child: Text("Error: $error")),
+              loading: () => const Center(child: CircularProgressIndicator()),
+            ),
           ),
         ],
       ),
