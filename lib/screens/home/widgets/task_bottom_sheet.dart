@@ -7,6 +7,7 @@ import 'package:mini_task_manager/providers/task_repository_impl_provider.dart';
 import 'package:mini_task_manager/screens/home/providers/new_task_provider.dart';
 import 'package:mini_task_manager/screens/home/providers/filtered_tasks_provider.dart';
 import 'package:mini_task_manager/screens/home/providers/read_only_provider.dart';
+import 'package:mini_task_manager/utils/theme_manager.dart';
 import 'package:mini_task_manager/widgets/basic_bottom_sheet.dart';
 import 'package:mini_task_manager/widgets/basic_button.dart';
 import 'package:mini_task_manager/widgets/basic_radio.dart';
@@ -34,9 +35,7 @@ class _TaskBottomSheetState extends ConsumerState<TaskBottomSheet> {
     titleController = TextEditingController(text: task.title);
     descriptionController = TextEditingController(text: task.description);
     dueDateController = TextEditingController(
-      text: widget.existingTask != null
-          ? task.date.toLocal().toString().split(' ')[0]
-          : task.date.toLocal().toString(),
+      text: ThemeManager.dateFormat.format(task.date),
     );
   }
 
@@ -72,6 +71,7 @@ class _TaskBottomSheetState extends ConsumerState<TaskBottomSheet> {
               controller: descriptionController,
               label: "Description",
               readOnly: widget.existingTask != null && readOnly,
+              maxLines: 5,
               onChanged: (value) {
                 ref
                     .read(
@@ -108,37 +108,60 @@ class _TaskBottomSheetState extends ConsumerState<TaskBottomSheet> {
                 }).toList(),
               ),
             ),
-            widget.existingTask != null && readOnly
-                ? BasicTextField(
-                    controller: dueDateController,
-                    label: "Due Date",
-                    readOnly: widget.existingTask != null && readOnly,
-                  )
-                : SizedBox(
-                    height: 200,
-                    width: double.maxFinite,
-                    child: CupertinoDatePicker(
-                      itemExtent: 50,
-                      backgroundColor: Colors.white,
-                      minimumDate: DateTime(
-                        DateTime.now().year,
-                        DateTime.now().month,
-                        DateTime.now().day,
-                      ),
-                      initialDateTime: task.date,
-                      maximumDate: DateTime(2050),
-                      mode: CupertinoDatePickerMode.date,
-                      onDateTimeChanged: (date) {
-                        ref
-                            .read(
-                              newTaskProvider(
-                                initial: widget.existingTask,
-                              ).notifier,
-                            )
-                            .updateDate(date);
-                      },
-                    ),
-                  ),
+            // widget.existingTask != null && readOnly
+            //     ?
+            BasicTextField(
+              controller: dueDateController,
+              label: "Due Date",
+              readOnly: true,
+              onTap: () async {
+                DateTime startDate = DateTime(
+                  DateTime.now().year,
+                  DateTime.now().month,
+                  DateTime.now().day,
+                );
+                DateTime? date = await showDatePicker(
+                  context: context,
+                  initialDate: startDate,
+                  firstDate: startDate,
+                  lastDate: DateTime(2050),
+                );
+
+                if (date != null) {
+                  ref
+                      .read(
+                        newTaskProvider(initial: widget.existingTask).notifier,
+                      )
+                      .updateDate(date);
+                  dueDateController.text = ThemeManager.dateFormat.format(date);
+                }
+              },
+            ),
+            // : SizedBox(
+            //     height: 200,
+            //     width: double.maxFinite,
+            //     child: CupertinoDatePicker(
+            //       itemExtent: 50,
+            //       backgroundColor: Colors.white,
+            //       minimumDate: DateTime(
+            //         DateTime.now().year,
+            //         DateTime.now().month,
+            //         DateTime.now().day,
+            //       ),
+            //       initialDateTime: task.date,
+            //       maximumDate: DateTime(2050),
+            //       mode: CupertinoDatePickerMode.date,
+            //       onDateTimeChanged: (date) {
+            //         ref
+            //             .read(
+            //               newTaskProvider(
+            //                 initial: widget.existingTask,
+            //               ).notifier,
+            //             )
+            //             .updateDate(date);
+            //       },
+            //     ),
+            //   ),
             SizedBox(
               height: 50,
               child: Row(
@@ -148,6 +171,7 @@ class _TaskBottomSheetState extends ConsumerState<TaskBottomSheet> {
                       data: widget.existingTask != null
                           ? (readOnly ? "Edit Task" : "Update Task")
                           : "Add Task",
+                      maxButton: true,
                       onPressed: () async {
                         final updatedTask = ref.read(
                           newTaskProvider(initial: widget.existingTask),

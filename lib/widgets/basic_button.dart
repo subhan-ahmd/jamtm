@@ -20,7 +20,7 @@ class BasicButton extends StatelessWidget {
     this.backgroundColor,
     this.textColor,
     this.maxButton = false,
-    this.noPadding = true,
+    this.noPadding = false,
     this.paddingSize = const Size(0, 0),
     this.buttonSize,
     this.icon,

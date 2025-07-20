@@ -21,18 +21,21 @@ class BasicBottomSheet extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       width: double.infinity,
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          SafeArea(
-            child: Container(
-              padding: EdgeInsets.all(ThemeManager.horizontalPadding),
-              child: child,
+      child: Padding(
+        padding:  EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom,),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            SafeArea(
+              child: Container(
+                padding: EdgeInsets.all(ThemeManager.horizontalPadding),
+                child: child,
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

@@ -8,6 +8,9 @@ class BasicTextField extends StatelessWidget {
   final bool readOnly;
   final void Function(String)? onChanged;
   final void Function()? onTap;
+  final bool expands;
+  final int? maxLines;
+  final int? minLines;
   const BasicTextField({
     super.key,
     required this.label,
@@ -16,6 +19,9 @@ class BasicTextField extends StatelessWidget {
     this.onTap,
     this.readOnly = false,
     this.onChanged,
+    this.expands=false,
+    this.maxLines =1,
+    this.minLines =1,
   });
   static const inputBorder = OutlineInputBorder(
     borderSide: BorderSide(color: ColorManager.accent),
@@ -29,6 +35,9 @@ class BasicTextField extends StatelessWidget {
       onTap: onTap,
       readOnly: readOnly,
       onChanged: onChanged,
+      expands: expands,
+      maxLines: maxLines,
+      minLines: minLines,
       style: TextStyle(color: ColorManager.primaryText, fontSize: 16),
       decoration: InputDecoration(
         border: BasicTextField.inputBorder,
