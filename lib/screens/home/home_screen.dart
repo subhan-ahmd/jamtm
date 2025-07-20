@@ -9,6 +9,8 @@ import 'package:mini_task_manager/screens/home/widgets/task_bottom_sheet.dart';
 import 'package:mini_task_manager/screens/home/widgets/task_tile.dart';
 import 'package:mini_task_manager/widgets/basic_bottom_sheet.dart';
 import 'package:mini_task_manager/widgets/basic_button.dart';
+import 'package:mini_task_manager/widgets/basic_scaffold/new_task_fab.dart';
+import 'package:mini_task_manager/widgets/loading_widget.dart';
 
 class HomeScreen extends ConsumerWidget {
   const HomeScreen({super.key});
@@ -20,6 +22,7 @@ class HomeScreen extends ConsumerWidget {
     final priority = ref.watch(taskPriorityProvider);
     final dueDate = ref.watch(taskDueDateProvider);
     return Scaffold(
+      floatingActionButton: NewTaskFab(),
       appBar: AppBar(
         title: selectedTasks.isEmpty
             ? Text("Mini Task Manager")
@@ -181,24 +184,13 @@ class HomeScreen extends ConsumerWidget {
                   );
                 },
               ),
+               loading: () => LoadingWidget(),
               error: (error, stackTrace) =>
                   Center(child: Text("Error: $error")),
-              loading: () => const Center(child: CircularProgressIndicator()),
             ),
           ),
         ],
-      ),
-      floatingActionButton: FloatingActionButton(
-        tooltip: 'Add',
-        onPressed: () {
-          BasicBottomSheet.openSheet(
-            context,
-            TaskBottomSheet(),
-            isScrollControlled: true,
-          );
-        },
-        child: const Icon(Icons.add),
-      ),
+      )
     );
   }
 }
