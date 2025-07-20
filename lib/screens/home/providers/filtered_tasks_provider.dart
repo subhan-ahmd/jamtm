@@ -9,11 +9,20 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'filtered_tasks_provider.g.dart';
 
 @riverpod
-Future<List<Task>> filteredTasks(Ref ref) {
+Future<List<Task>> filteredTasks(Ref ref, {bool upcoming = false}) {
   final repo = ref.watch(taskRepositoryProvider);
   final priority = ref.watch(taskPriorityProvider);
-  final dueDate = ref.watch(taskDueDateProvider);
+  late final DateTime? dueDate;
+  if (upcoming) {
+    dueDate = DateTime(
+      DateTime.now().year,
+      DateTime.now().month,
+      DateTime.now().day,
+    );
+  } else {
+    dueDate = ref.watch(taskDueDateProvider);
+  }
   return repo
-      .filter(priority: priority, dueDate: dueDate)
+      .filter(priority: priority, dueDate: dueDate, dueDateOrLater: upcoming)
       .then((tasks) => tasks.map((e) => e.toEntity()).toList());
 }

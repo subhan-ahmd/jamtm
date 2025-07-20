@@ -15,7 +15,7 @@ class HomeScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final tasks = ref.watch(filteredTasksProvider);
+    final tasks = ref.watch(filteredTasksProvider());
     final selectedTasks = ref.watch(selectedTasksProvider);
     final priority = ref.watch(taskPriorityProvider);
     final dueDate = ref.watch(taskDueDateProvider);
@@ -36,7 +36,7 @@ class HomeScreen extends ConsumerWidget {
                       ? IconButton(
                           onPressed: () async {
                             List<int> allTasks = (await ref.read(
-                              filteredTasksProvider.future,
+                              filteredTasksProvider().future,
                             )).map((task) => task.id!).toList();
                             ref
                                 .read(selectedTasksProvider.notifier)
@@ -51,7 +51,7 @@ class HomeScreen extends ConsumerWidget {
                 IconButton(
                   onPressed: () async {
                     List allTasks = (await ref.read(
-                      filteredTasksProvider.future,
+                      filteredTasksProvider().future,
                     ));
                     if (allTasks.length == selectedTasks.length) {
                       await ref.read(taskRepositoryProvider).deleteAll();
@@ -132,14 +132,10 @@ class HomeScreen extends ConsumerWidget {
                       onPressed: () async {
                         ref
                             .read(taskDueDateProvider.notifier)
-                            .filterDueDate(
-                              null
-                            );
-                         ref
-                          .read(taskPriorityProvider.notifier)
-                          .filterPriority(
-                           null
-                          );
+                            .filterDueDate(null);
+                        ref
+                            .read(taskPriorityProvider.notifier)
+                            .filterPriority(null);
                       },
                     ),
                 ],
