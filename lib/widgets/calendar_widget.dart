@@ -4,6 +4,7 @@ import 'package:mini_task_manager/models/task.dart';
 import 'package:mini_task_manager/screens/calendar_view/data/task_data_source.dart';
 import 'package:mini_task_manager/screens/home/providers/filtered_tasks_provider.dart';
 import 'package:mini_task_manager/screens/home/widgets/task_bottom_sheet.dart';
+import 'package:mini_task_manager/utils/color_manager.dart';
 import 'package:mini_task_manager/widgets/basic_bottom_sheet.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 
@@ -23,6 +24,8 @@ class CalendarWidget extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return SfCalendar(
+      todayHighlightColor: ColorManager.accent,
+      cellBorderColor: ColorManager.accent,
       dataSource: TaskDataSource(tasks),
       view: view,
       scheduleViewSettings: scheduleViewSettings,
@@ -44,6 +47,10 @@ class CalendarWidget extends ConsumerWidget {
           }
         }
       },
+      headerStyle: CalendarHeaderStyle(
+        backgroundColor: ColorManager.background,
+        textStyle: TextStyle(color: ColorManager.primaryText),
+      ),
     );
   }
 }
