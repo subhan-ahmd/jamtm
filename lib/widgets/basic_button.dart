@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mini_task_manager/utils/color_manager.dart';
+import 'package:jamtm/utils/color_manager.dart';
 
 class BasicButton extends StatelessWidget {
   final String data;

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:mini_task_manager/models/task.dart';
-import 'package:mini_task_manager/screens/calendar_view/data/task_data_source.dart';
-import 'package:mini_task_manager/screens/home/providers/filtered_tasks_provider.dart';
-import 'package:mini_task_manager/screens/home/widgets/task_bottom_sheet.dart';
-import 'package:mini_task_manager/utils/color_manager.dart';
-import 'package:mini_task_manager/widgets/basic_bottom_sheet.dart';
+import 'package:jamtm/models/task.dart';
+import 'package:jamtm/screens/calendar_view/data/task_data_source.dart';
+import 'package:jamtm/screens/home/providers/filtered_tasks_provider.dart';
+import 'package:jamtm/screens/home/widgets/task_bottom_sheet.dart';
+import 'package:jamtm/utils/color_manager.dart';
+import 'package:jamtm/widgets/basic_bottom_sheet.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 
 class CalendarWidget extends ConsumerWidget {

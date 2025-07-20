@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mini_task_manager/screens/home/providers/selected_tasks_provider.dart';
+import 'package:jamtm/screens/home/providers/selected_tasks_provider.dart';
 import 'package:riverpod/riverpod.dart';
 
 void main() {

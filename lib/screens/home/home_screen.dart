@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:mini_task_manager/providers/task_repository_impl_provider.dart';
-import 'package:mini_task_manager/screens/home/providers/filtered_tasks_provider.dart';
-import 'package:mini_task_manager/screens/home/providers/selected_tasks_provider.dart';
-import 'package:mini_task_manager/screens/home/providers/task_due_date_provider.dart';
-import 'package:mini_task_manager/screens/home/providers/task_priority_provider.dart';
-import 'package:mini_task_manager/screens/home/widgets/task_bottom_sheet.dart';
-import 'package:mini_task_manager/screens/home/widgets/task_tile.dart';
-import 'package:mini_task_manager/utils/color_manager.dart';
-import 'package:mini_task_manager/utils/theme_manager.dart';
-import 'package:mini_task_manager/widgets/basic_bottom_sheet.dart';
-import 'package:mini_task_manager/widgets/basic_button.dart';
-import 'package:mini_task_manager/widgets/new_task_fab.dart';
-import 'package:mini_task_manager/widgets/loading_widget.dart';
+import 'package:jamtm/providers/task_repository_impl_provider.dart';
+import 'package:jamtm/screens/home/providers/filtered_tasks_provider.dart';
+import 'package:jamtm/screens/home/providers/selected_tasks_provider.dart';
+import 'package:jamtm/screens/home/providers/task_due_date_provider.dart';
+import 'package:jamtm/screens/home/providers/task_priority_provider.dart';
+import 'package:jamtm/screens/home/widgets/task_bottom_sheet.dart';
+import 'package:jamtm/screens/home/widgets/task_tile.dart';
+import 'package:jamtm/utils/color_manager.dart';
+import 'package:jamtm/utils/theme_manager.dart';
+import 'package:jamtm/widgets/basic_bottom_sheet.dart';
+import 'package:jamtm/widgets/basic_button.dart';
+import 'package:jamtm/widgets/new_task_fab.dart';
+import 'package:jamtm/widgets/loading_widget.dart';
 
 class HomeScreen extends ConsumerWidget {
   const HomeScreen({super.key});

@@ -1,2 +1,2 @@
-# mini_task_manager
+# jamtm
 Just a mini task manager.

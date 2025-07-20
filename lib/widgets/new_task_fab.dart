@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:mini_task_manager/screens/home/widgets/task_bottom_sheet.dart';
-import 'package:mini_task_manager/widgets/basic_bottom_sheet.dart';
+import 'package:jamtm/screens/home/widgets/task_bottom_sheet.dart';
+import 'package:jamtm/widgets/basic_bottom_sheet.dart';
 
 class NewTaskFab extends StatelessWidget {
   const NewTaskFab({super.key});

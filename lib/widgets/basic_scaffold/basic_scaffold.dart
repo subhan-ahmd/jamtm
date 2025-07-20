@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:mini_task_manager/utils/color_manager.dart';
-import 'package:mini_task_manager/widgets/basic_scaffold/providers/current_tab_provider.dart';
+import 'package:jamtm/utils/color_manager.dart';
+import 'package:jamtm/widgets/basic_scaffold/providers/current_tab_provider.dart';
 
 class BasicScaffold extends ConsumerWidget {
   final List<NavigationDestination> destinations;

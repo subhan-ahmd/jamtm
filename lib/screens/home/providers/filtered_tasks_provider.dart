@@ -1,9 +1,9 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:mini_task_manager/data/mappers/task_mappers.dart';
-import 'package:mini_task_manager/models/task.dart';
-import 'package:mini_task_manager/providers/task_repository_impl_provider.dart';
-import 'package:mini_task_manager/screens/home/providers/task_due_date_provider.dart';
-import 'package:mini_task_manager/screens/home/providers/task_priority_provider.dart';
+import 'package:jamtm/data/mappers/task_mappers.dart';
+import 'package:jamtm/models/task.dart';
+import 'package:jamtm/providers/task_repository_impl_provider.dart';
+import 'package:jamtm/screens/home/providers/task_due_date_provider.dart';
+import 'package:jamtm/screens/home/providers/task_priority_provider.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'filtered_tasks_provider.g.dart';

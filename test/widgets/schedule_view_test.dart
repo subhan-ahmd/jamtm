@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mini_task_manager/screens/home/providers/filtered_tasks_provider.dart';
-import 'package:mini_task_manager/screens/schedule_view/schedule_view_screen.dart';
-import 'package:mini_task_manager/widgets/calendar_widget.dart';
-import 'package:mini_task_manager/models/task.dart';
+import 'package:jamtm/screens/home/providers/filtered_tasks_provider.dart';
+import 'package:jamtm/screens/schedule_view/schedule_view_screen.dart';
+import 'package:jamtm/widgets/calendar_widget.dart';
+import 'package:jamtm/models/task.dart';
 
 void main() {
   group('ScheduleViewScreen Widget Tests', () {

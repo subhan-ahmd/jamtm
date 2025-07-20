@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mini_task_manager/models/task.dart';
-import 'package:mini_task_manager/screens/home/home_screen.dart';
-import 'package:mini_task_manager/screens/home/providers/filtered_tasks_provider.dart';
+import 'package:jamtm/models/task.dart';
+import 'package:jamtm/screens/home/home_screen.dart';
+import 'package:jamtm/screens/home/providers/filtered_tasks_provider.dart';
 
 void main() {
   group('HomeScreen Widget Tests', () {

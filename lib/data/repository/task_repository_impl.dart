@@ -1,6 +1,6 @@
 import 'package:drift/drift.dart';
-import 'package:mini_task_manager/database/database.dart';
-import 'package:mini_task_manager/domain/repository/base_repository.dart';
+import 'package:jamtm/database/database.dart';
+import 'package:jamtm/domain/repository/base_repository.dart';
 
 enum OrderBy { priority, date }
 

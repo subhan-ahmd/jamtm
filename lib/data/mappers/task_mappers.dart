@@ -1,6 +1,6 @@
 import 'package:drift/drift.dart';
-import 'package:mini_task_manager/database/database.dart';
-import 'package:mini_task_manager/models/task.dart';
+import 'package:jamtm/database/database.dart';
+import 'package:jamtm/models/task.dart';
 
 extension TaskMapping on Task {
   TaskTableCompanion toCompanion() {

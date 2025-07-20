@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:mini_task_manager/data/mappers/task_mappers.dart';
-import 'package:mini_task_manager/models/task.dart';
-import 'package:mini_task_manager/providers/task_repository_impl_provider.dart';
-import 'package:mini_task_manager/screens/home/providers/new_task_provider.dart';
-import 'package:mini_task_manager/screens/home/providers/filtered_tasks_provider.dart';
-import 'package:mini_task_manager/screens/home/providers/read_only_provider.dart';
-import 'package:mini_task_manager/utils/theme_manager.dart';
-import 'package:mini_task_manager/widgets/basic_bottom_sheet.dart';
-import 'package:mini_task_manager/widgets/basic_button.dart';
-import 'package:mini_task_manager/widgets/basic_radio.dart';
-import 'package:mini_task_manager/widgets/basic_text_field.dart';
+import 'package:jamtm/data/mappers/task_mappers.dart';
+import 'package:jamtm/models/task.dart';
+import 'package:jamtm/providers/task_repository_impl_provider.dart';
+import 'package:jamtm/screens/home/providers/new_task_provider.dart';
+import 'package:jamtm/screens/home/providers/filtered_tasks_provider.dart';
+import 'package:jamtm/screens/home/providers/read_only_provider.dart';
+import 'package:jamtm/utils/theme_manager.dart';
+import 'package:jamtm/widgets/basic_bottom_sheet.dart';
+import 'package:jamtm/widgets/basic_button.dart';
+import 'package:jamtm/widgets/basic_radio.dart';
+import 'package:jamtm/widgets/basic_text_field.dart';
 
 const Map<int, String> priorityLabels = {1: "Low", 2: "Medium", 3: "High"};
 

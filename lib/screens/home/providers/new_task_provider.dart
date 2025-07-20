@@ -1,4 +1,4 @@
-import 'package:mini_task_manager/models/task.dart';
+import 'package:jamtm/models/task.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'new_task_provider.g.dart';

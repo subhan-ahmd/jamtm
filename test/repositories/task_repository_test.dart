@@ -1,6 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mini_task_manager/data/repository/task_repository_impl.dart';
-import 'package:mini_task_manager/database/database.dart';
+import 'package:jamtm/data/repository/task_repository_impl.dart';
+import 'package:jamtm/database/database.dart';
 import 'package:drift/drift.dart';
 
 void main() {

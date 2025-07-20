@@ -1,5 +1,5 @@
-import 'package:mini_task_manager/models/task.dart';
-import 'package:mini_task_manager/utils/color_manager.dart';
+import 'package:jamtm/models/task.dart';
+import 'package:jamtm/utils/color_manager.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 
 class TaskDataSource extends CalendarDataSource {

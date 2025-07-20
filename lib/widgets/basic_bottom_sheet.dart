@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mini_task_manager/utils/theme_manager.dart';
+import 'package:jamtm/utils/theme_manager.dart';
 
 class BasicBottomSheet extends StatelessWidget {
   final Widget? child;

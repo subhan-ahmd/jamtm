@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:mini_task_manager/models/task.dart';
-import 'package:mini_task_manager/screens/home/widgets/priority_bubble.dart';
-import 'package:mini_task_manager/utils/theme_manager.dart';
-import 'package:mini_task_manager/widgets/basic_checkbox.dart';
+import 'package:jamtm/models/task.dart';
+import 'package:jamtm/screens/home/widgets/priority_bubble.dart';
+import 'package:jamtm/utils/theme_manager.dart';
+import 'package:jamtm/widgets/basic_checkbox.dart';
 
 class TaskTile extends ConsumerWidget {
   final Task task;

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:mini_task_manager/utils/color_manager.dart';
+import 'package:jamtm/utils/color_manager.dart';
 
 class ThemeManager {
   static double horizontalPadding = 16;

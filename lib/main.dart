@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:mini_task_manager/screens/calendar_view/calendar_view_screen.dart';
-import 'package:mini_task_manager/screens/home/home_screen.dart';
-import 'package:mini_task_manager/screens/schedule_view/schedule_view_screen.dart';
-import 'package:mini_task_manager/utils/theme_manager.dart';
-import 'package:mini_task_manager/widgets/basic_scaffold/basic_scaffold.dart';
+import 'package:jamtm/screens/calendar_view/calendar_view_screen.dart';
+import 'package:jamtm/screens/home/home_screen.dart';
+import 'package:jamtm/screens/schedule_view/schedule_view_screen.dart';
+import 'package:jamtm/utils/theme_manager.dart';
+import 'package:jamtm/widgets/basic_scaffold/basic_scaffold.dart';
 
 void main() {
   runApp(ProviderScope(child: const MiniTaskManager()));
