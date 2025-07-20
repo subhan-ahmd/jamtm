@@ -10,6 +10,7 @@ class BasicButton extends StatelessWidget {
   final bool maxButton;
   final Size? buttonSize;
   final bool noPadding;
+  final Size paddingSize;
   final Widget? icon;
   const BasicButton({
     super.key,
@@ -20,6 +21,7 @@ class BasicButton extends StatelessWidget {
     this.textColor,
     this.maxButton = false,
     this.noPadding = true,
+    this.paddingSize = const Size(0, 0),
     this.buttonSize,
     this.icon,
   });
@@ -34,16 +36,16 @@ class BasicButton extends StatelessWidget {
         ),
         visualDensity: VisualDensity.compact,
         tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-        backgroundColor: WidgetStateProperty.all(backgroundColor),
+        backgroundColor: WidgetStateProperty.all(backgroundColor??ColorManager.background),
         surfaceTintColor: WidgetStateProperty.all(Colors.transparent),
-        minimumSize: maxButton
+        minimumSize: noPadding?WidgetStateProperty.all(paddingSize):(maxButton
                 ? WidgetStateProperty.all(Size(double.infinity, 55))
                 : (buttonSize != null
                     ? WidgetStateProperty.all(buttonSize ?? const Size(146, 44))
-                    : WidgetStateProperty.all(Size(80, 45))),
-        shadowColor: WidgetStateProperty.all(Colors.transparent),
+                    : WidgetStateProperty.all(Size(80, 45)))),
+        shadowColor: WidgetStateProperty.all(ColorManager.transparent),
         side: WidgetStateProperty.all(
-          BorderSide(color: borderColor ?? ColorManager.accent, width: 1.0),
+          BorderSide(color: borderColor ?? ColorManager.grey, width: 1.0),
         ),
         shape: WidgetStateProperty.all(
           RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
